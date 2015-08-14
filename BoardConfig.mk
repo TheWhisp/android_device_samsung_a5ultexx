@@ -57,9 +57,6 @@ TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
 # Assert
 TARGET_OTA_ASSERT_DEVICE := a5ulte,a5ultexx,SM-A500FU
 
-# Recovery
-TARGET_RECOVERY_FSTAB := device/samsung/a5ultexx/rootdir/fstab.qcom
-
 # Partition sizes
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 13631488
@@ -162,7 +159,7 @@ MAX_EGL_CACHE_SIZE := 2048*1024
 #OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 # TWRP
-TARGET_RECOVERY_INITRC := device/samsung/a5ultexx/recovery/init.rc
+#TARGET_RECOVERY_INITRC := device/samsung/a5ultexx/recovery/init.rc
 
 # Display
 DEVICE_RESOLUTION := 720x1280
@@ -178,11 +175,11 @@ BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/a5ultexx/recovery/recov
 BOARD_HAS_NO_SELECT_BUTTON := true
 
 # Storage
-TARGET_RECOVERY_FSTAB := device/samsung/a5ultexx/recovery/recovery.fstab
+TARGET_RECOVERY_FSTAB := device/samsung/a5ultexx/rootdir/fstab.qcom
 TW_INTERNAL_STORAGE_PATH := "/data/media"
 TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
-TW_EXTERNAL_STORAGE_PATH := "/sdcard"
-TW_EXTERNAL_STORAGE_MOUNT_POINT := "sdcard"
+TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 RECOVERY_SDCARD_ON_DATA := true
 
 # Misc.
