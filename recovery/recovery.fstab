@@ -1,0 +1,11 @@
+# <src>                                      <mnt_point>  	<type>  <mnt_flags and options>                     <fs_mgr_flags>
+/dev/block/platform/soc.0/7824900.sdhci/by-name/efs		/efs        	ext4		default		recoveryonly
+/dev/block/platform/soc.0/7824900.sdhci/by-name/boot		/boot		emmc		default		recoveryonly
+/dev/block/platform/soc.0/7824900.sdhci/by-name/recovery	/recovery  	emmc		default		recoveryonly
+/dev/block/platform/soc.0/7824900.sdhci/by-name/cache		/cache      	ext4		default		recoveryonly
+/dev/block/platform/soc.0/7824900.sdhci/by-name/system		/system     	ext4		default		recoveryonly
+/dev/block/platform/soc.0/7824900.sdhci/by-name/userdata	/data		ext4		default	 	wait,length=-16384
+/dev/block/platform/soc.0/7824900.sdhci/by-name/hidden		/preload     	ext4		default		recoveryonly
+/dev/block/platform/soc.0/7824900.sdhci/by-name/apnhlos         /modem          emmc            default         recoveryonly
+/dev/block/platform/soc.0/7824900.sdhci/by-name/modem           /firmware-modem emmc            default         recoveryonly
+/dev/block/mmcblk1p1					  	/sdcard		vfat		default		recoveryonly

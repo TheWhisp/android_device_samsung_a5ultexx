@@ -1,0 +1,11 @@
+# mount point         fstype          device
+
+/dev/block/platform/soc.0/7824900.sdhci/by-name
+
+/recovery             emmc      /dev/block/platform/soc.0/7824900.sdhci/by-name/recovery
+/boot                 emmc      /dev/block/platform/soc.0/7824900.sdhci/by-name/boot
+/system               ext4      /dev/block/platform/soc.0/7824900.sdhci/by-name/system 
+/cache                ext4      /dev/block/platform/soc.0/7824900.sdhci/by-name/cache
+/persist              ext4      /dev/block/platform/soc.0/7824900.sdhci/by-name/persist
+/data                 ext4      /dev/block/platform/soc.0/7824900.sdhci/by-name/userdata
+/external_sd          vfat      /dev/block/platform/soc.0/7864900.sdhci/by-num/p1         flags=display="SD card";storage;wipeingui;removable
