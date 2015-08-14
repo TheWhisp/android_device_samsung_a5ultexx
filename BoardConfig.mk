@@ -23,8 +23,6 @@
 # inherit from qcom-common
 -include device/samsung/qcom-common/BoardConfigCommon.mk
 
-BOARD_VENDOR := samsung
-
 # Platform
 TARGET_BOARD_PLATFORM := msm8916
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno306
@@ -159,11 +157,11 @@ MAX_EGL_CACHE_SIZE := 2048*1024
 #OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 # TWRP
-#TARGET_RECOVERY_INITRC := device/samsung/a5ultexx/recovery/init.rc
-
 # Display
 DEVICE_RESOLUTION := 720x1280
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
+# TODO:
+TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/devices/virtual/lcd/panel/panel/brightness\"
 TW_BRIGHTNESS_PATH := /sys/devices/virtual/lcd/panel/panel/brightness
 TW_MAX_BRIGHTNESS := 255

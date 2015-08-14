@@ -1,9 +1,9 @@
 # mount point	fstype	device			[device2]   fstype2
 
-/boot		emmc	/dev/block/platform/soc.0/7824900.sdhci/by-name/boot
-/system		ext4	/dev/block/platform/soc.0/7824900.sdhci/by-name/system
-/cache		ext4	/dev/block/platform/soc.0/7824900.sdhci/by-name/cache
-/data		ext4	/dev/block/platform/soc.0/7824900.sdhci/by-name/data	 length=-16384
+/boot		emmc	/dev/block/bootdevice/by-name/boot
+/system		ext4	/dev/block/bootdevice/by-name/system
+/cache		ext4	/dev/block/bootdevice/by-name/cache
+/data		ext4	/dev/block/bootdevice/by-name/userdata 	 length=-16384
 
-/external_sd    vfat    /dev/block/platform/soc.0/7864900.sdhci/by-num/p1    /dev/block/platform/soc.0/7864900.sdhci/by-num/p1  flags=display="Micro SDcard";storage;wipeingui;removable
+/external_sd    vfat    /dev/block/platform/7864900.sdhci/by-num/p1    /dev/block/platform/7864900.sdhci/by-num/p1  flags=display="Micro SDcard";storage;wipeingui;removable
 

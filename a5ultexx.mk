@@ -31,6 +31,10 @@ TARGET_SCREEN_WIDTH := 720
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
+# For TWRP
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
+
 # NFC packages
 PRODUCT_PACKAGES += \
     libnfc_nci \
@@ -38,6 +42,7 @@ PRODUCT_PACKAGES += \
     Tag \
     com.android.nfc_extras
 
+# DTB tool
 PRODUCT_PACKAGES += \
     dtbToolCM
 
