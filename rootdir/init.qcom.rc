@@ -30,46 +30,62 @@ import init.qcom.usb.rc
 import init.target.rc
 
 on early-init
-    mount debugfs debugfs /sys/kernel/debug
     mkdir /firmware 0771 system system
     mkdir /firmware-modem 0771 system system
-    mkdir /system 0777 root root
+
     symlink /data/tombstones /tombstones
 
 on init
-    # Set permissions for persist partition
-    mkdir /persist 0771 system system
-
-    # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
+    mkdir /storage 0550 system sdcard_r
     mkdir /storage/emulated 0555 root root
+
+    #External storage directories
+    mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
     mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
     mkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw
+
+    mkdir /storage/sdcard0 0700 root root
     mkdir /storage/sdcard1 0700 root root
     mkdir /storage/usbdisk 0700 root root
 
     export EXTERNAL_STORAGE /storage/emulated/legacy
+    export SECONDARY_STORAGE /storage/sdcard1:/storage/usbdisk
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
     export EMULATED_STORAGE_TARGET /storage/emulated
-    export SECONDARY_STORAGE /storage/sdcard1
 
-    # Support legacy paths
+    # for backwards compatibility
     symlink /storage/emulated/legacy /sdcard
     symlink /storage/emulated/legacy /mnt/sdcard
     symlink /storage/emulated/legacy /storage/sdcard0
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+    symlink /storage/sdcard1 /extSdCard
+    symlink /storage/sdcard1 /mnt/extSdCard
+    symlink /storage/sdcard1 /external_sd
     symlink /storage/usbdisk /usbdisk
     symlink /storage/usbdisk /mnt/usbdisk
 
+on fs
+    mount_all fstab.qcom
+
+    restorecon_recursive /efs
+
+    setprop ro.crypto.fuse_sdcard true
+
+    write /sys/kernel/boot_adsp/boot 1
+    setprop qcom.audio.init complete
+
 on early-boot
+    mount debugfs debugfs /sys/kernel/debug
+
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
+
     # Allow subsystem (modem etc) debugging
     write /sys/module/subsystem_restart/parameters/enable_debug ${persist.sys.ssr.enable_debug}
     write /sys/module/pil_msa/parameters/pbl_mba_boot_timeout_ms ${persist.sys.mba_boot_timeout}
     write /sys/module/pil_msa/parameters/modem_auth_timeout_ms ${persist.sys.modem_auth_timeout}
     write /sys/module/peripheral_loader/parameters/proxy_timeout_ms ${persist.sys.pil_proxy_timeout}
-    write /sys/kernel/boot_adsp/boot 1
 
 on boot
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
@@ -79,7 +95,7 @@ on boot
     chown bluetooth bluetooth /sys/module/hci_uart/parameters/ath_lpm
     chown bluetooth bluetooth /sys/module/hci_uart/parameters/ath_btwrite
     chown system system /sys/module/sco/parameters/disable_esco
-    chown bluetooth bluetooth /sys/module/hci_smd/parameters/hcismd_set
+    chown bluetooth net_bt_stack /sys/module/hci_smd/parameters/hcismd_set
     chmod 0660 /sys/module/bluetooth_power/parameters/power
     chmod 0660 /sys/module/hci_smd/parameters/hcismd_set
     chmod 0660 /sys/class/rfkill/rfkill0/state
@@ -96,6 +112,7 @@ on boot
 
     # For BT MAC address
     mkdir /efs/bluetooth 0775 radio system
+
     # If already exist
     chown radio system /efs/bluetooth
     chmod 0775 /efs/bluetooth
@@ -116,7 +133,6 @@ on boot
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.wifi    524288,2097152,4194304,262144,524288,1048576
 
-
     setprop ro.telephony.call_ring.multiple false
 
     # Set SUID bit for usbhub
@@ -125,7 +141,6 @@ on boot
 
     #Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
-
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
 
@@ -187,24 +202,162 @@ on boot
     # Allow access for CCID command/response timeout configuration
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
-#
-# start netmgrd
-#
-on property:ro.use_data_netmgrd=true
-    start netmgrd
+    # NFC : Permissions for NFC
+    chmod 0660 /dev/sec-nfc
+    chown nfc nfc /dev/sec-nfc
+
+    chmod 0660 /dev/pn547
+    chown nfc nfc /dev/pn547
+
+    # Accelerometer_sensor
+    chown system radio /sys/class/sensors/accelerometer_sensor/raw_data
+    chown system radio /sys/class/sensors/accelerometer_sensor/calibration
+    chown system radio /sys/class/sensors/accelerometer_sensor/reactive_alert
+    chown system radio /sys/class/sensors/accelerometer_sensor/vendor
+    chown system radio /sys/class/sensors/accelerometer_sensor/name
+    chown system radio /sys/class/sensors/accelerometer_sensor/selftest
+    chown system radio /sys/class/sensors/accelerometer_sensor/lowpassfilter
+
+    # Proximity_sensor
+    chown system radio /sys/class/sensors/proximity_sensor/state
+    chown system radio /sys/class/sensors/proximity_sensor/raw_data
+    chown system radio /sys/class/sensors/proximity_sensor/prox_avg
+    chown system radio /sys/class/sensors/proximity_sensor/prox_cal
+    chown system radio /sys/class/sensors/proximity_sensor/vendor
+    chown system radio /sys/class/sensors/proximity_sensor/name
+    chown system radio /sys/class/sensors/proximity_sensor/thresh_high
+    chown system radio /sys/class/sensors/proximity_sensor/thresh_low
+    chown system radio /sys/class/sensors/proximity_sensor/prox_offset_pass
+
+    # Magnetic_sensor
+    chown system radio /sys/class/sensors/magnetic_sensor/selftest
+    chown system radio /sys/class/sensors/magnetic_sensor/raw_data
+    chown system radio /sys/class/sensors/magnetic_sensor/adc
+    chown system radio /sys/class/sensors/magnetic_sensor/vendor
+    chown system radio /sys/class/sensors/magnetic_sensor/name
+    chown system radio /sys/class/sensors/magnetic_sensor/status
+
+    # Light_sensor
+    chown system radio /sys/class/sensors/light_sensor/lux
+    chown system radio /sys/class/sensors/light_sensor/raw_data
+    chown system radio /sys/class/sensors/light_sensor/vendor
+    chown system radio /sys/class/sensors/light_sensor/name
+
+    # permission for Input Device(TSP).
+    chown system radio /sys/class/sec/tsp/cmd
+    chmod 0660 /sys/class/sec/tsp/input/enabled
+    chown system system /sys/class/sec/tsp/input/enabled
+
+    # permission for Input Device(TKEY).
+    chmod 0660 /sys/class/sec/sec_touchkey/input/enabled
+    chown system system /sys/class/sec/sec_touchkey/input/enabled
+    chown system system /sys/class/sec/sec_touchkey/brightness
+
+    chown radio system /sys/devices/system/cpu/kernel_max
+    chmod 664 /sys/devices/system/cpu/kernel_max
+
+    chown radio system /sys/class/kgsl/kgsl-3d0/max_pwrlevel
+    chmod 664  /sys/class/kgsl/kgsl-3d0/max_pwrlevel
+    chown radio system /sys/class/kgsl/kgsl-3d0/min_pwrlevel
+    chmod 664  /sys/class/kgsl/kgsl-3d0/min_pwrlevel
+    chown radio system /sys/class/kgsl/kgsl-3d0/gpu_available_frequencies
+    chmod 664  /sys/class/kgsl/kgsl-3d0/gpu_available_frequencies
+
+    # Permissions for SSRM
+    chmod 0664 /sys/devices/platform/sec-thermistor/temperature
+    chmod 0664 /sys/class/power_supply/battery/siop_level
+    chmod 0664 /sys/class/power_supply/battery/test_charge_current
+    chown radio system /sys/devices/platform/sec-thermistor/temperature
+    chown radio system /sys/class/power_supply/battery/siop_level
+    chown radio system /sys/class/power_supply/battery/test_charge_current
+
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_slack
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_slack
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/target_loads
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/target_loads
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/boost
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boost
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/boostpulse
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/input_boost
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/input_boost
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+
+    # Assume SMP uses shared cpufreq policy for all CPUs
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+
+    # LCD mdnie and panel work
+    chown system system  /sys/class/mdnie/mdnie/lcdtype
+    chown system system  /sys/class/mdnie/mdnie/lcd_power
+    chown system media_rw /sys/class/mdnie/mdnie/scenario
+    chmod 0660 /sys/class/mdnie/mdnie/scenario
+    chown system system /sys/class/mdnie/mdnie/sensorRGB
+    chmod 0660 /sys/class/mdnie/mdnie/sensorRGB
+
+    chown system system /sys/class/mdnie/mdnie/tuning
+    chown system media_rw /sys/class/mdnie/mdnie/outdoor
+    chown system system  /sys/class/mdnie/mdnie/mdnie_temp
+    chown system media_rw /sys/class/mdnie/mdnie/mode
+    chown system system /sys/class/mdnie/mdnie/negative
+    chown system media_rw /sys/class/mdnie/mdnie/playspeed
+    chown system media_rw /sys/class/mdnie/mdnie/accessibility
+    chown system system  /sys/class/mdnie/mdnie/cabc
+    chown system system  /sys/class/mdnie/mdnie/bypass
+
+    chown system system /sys/class/lcd/panel/panel/auto_brightness
+    chown system system /sys/class/lcd/panel/window_type
+    chown radio system /sys/class/lcd/panel/power_reduce
+    chown radio system /sys/class/lcd/panel/siop_enable
+    chown radio system /sys/class/lcd/panel/temperature
+    chown radio system /sys/class/lcd/panel/tuning
+    chown radio system /sys/class/lcd/panel/lux
+
+    chown radio system /sys/class/lcd/panel/partial_disp
+    chmod 0660 /sys/class/lcd/panel/partial_disp
+
+    # Adjust YUV to RGB Conversion(CSC_Conversion)
+    chown system media_rw /sys/class/graphics/fb0/csc_cfg
+    chmod 0660 /sys/class/graphics/fb0/csc_cfg
+
+    # Permissions for gpio_keys
+    chown system radio /sys/class/sec/sec_key/wakeup_keys
+    write /sys/class/sec/sec_key/wakeup_keys 116,172
+
+    # Permissions for Camera
+    chown system system /sys/class/camera/rear/isp_core
+    chown system system /sys/class/camera/rear/rear_camfw_full
+    chown system system /sys/class/camera/rear/rear_camfw
+    chown system system /sys/class/camera/rear/rear_camtype
+    chown system radio /sys/class/camera/flash/rear_flash
+    chown system system /sys/class/camera/front/front_camfw
+    chown system system /sys/class/camera/front/front_camtype
+    chown system system /sys/class/camera/front/front_camfw_full
+    chown system system /sys/class/camera/front/front_camfw_load
+    chown system system /sys/class/camera/rear/rear_checkfw_user
+    chown system system /sys/class/camera/rear/rear_checkfw_factory
+
+    #OTG Test
+    chown system radio /sys/class/host_notify/usb_otg/booster
+    chmod 0660 /sys/class/host_notify/usb_otg/booster
 
 # msm specific files that need to be created on /data
 on post-fs-data
-    # Create directory for TZ Apps
-    mkdir /data/misc/qsee 0770 system system
-
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
-    mkdir /data/misc/camera 0770 camera camera
-
     mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
-
-    mkdir /data/misc/ipa 0700 net_admin net_admin
 
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
 
@@ -229,24 +382,28 @@ on post-fs-data
     chmod 0660 /efs/wifi/.mac.info
     chmod 0660 /efs/wifi/.mac.cob
 
+    # for WIFI Cert
+    chmod 0664 /data/.bustxglom.info
+    chmod 0664 /data/.roamoff.info
+    chmod 0664 /data/.frameburst.info
+    chmod 0664 /data/.txbf.info
+
     # for WIFI Version
     write /data/.wifiver.info 0
     chown system root /data/.wifiver.info
     chmod 0666 /data/.wifiver.info
 
+    mkdir /data/tombstones 0771 system system
+    mkdir /tombstones/modem 0771 system system
+    mkdir /tombstones/lpass 0771 system system
+    mkdir /tombstones/wcnss 0771 system system
+    mkdir /tombstones/dsps 0771 system system
+    mkdir /persist/data/sfs 0700 system system
+    mkdir /persist/data/tz 0700 system system
+
     # Create the directories used by CnE subsystem
     mkdir /data/connectivity 0771 system system
     chown system system /data/connectivity
-
-    # Create the directories used by DPM subsystem
-    mkdir /data/dpm 0771 system system
-    chown system system /data/dpm
-
-    mkdir /data/dpm/fdMgr 0771 system system
-    chown system system /data/dpm/fdMgr
-
-    mkdir /data/dpm/nsrm 0771 system system
-    chown system system /data/dpm/nsrm
 
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
@@ -254,13 +411,7 @@ on post-fs-data
     # Create directory used by the DASH client
     mkdir /data/misc/dash 0770 media audio
 
-    # Create directory used by display clients
-    mkdir /data/misc/display 0770 system graphics
-
     # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
-    # We chown/chmod /persist again so because mount is run as root + defaults
-    chown system system /persist
-    chmod 0771 /persist
     chmod 0664 /sys/devices/platform/msm_sdcc.1/polling
     chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
     chmod 0664 /sys/devices/platform/msm_sdcc.3/polling
@@ -284,15 +435,15 @@ on post-fs-data
     mkdir /data/misc/location/quipc 0770 gps system
     mkdir /data/misc/location/gsiff 0770 gps gps
 
-    #Create directory from IMS services
+    # Create directory from IMS services
     mkdir /data/shared 0755
     chown system system /data/shared
 
-    #Create directory for FOTA
+    # Create directory for FOTA
     mkdir /data/fota 0771
     chown system system /data/fota
 
-    #Create directory for hostapd
+    # Create directory for hostapd
     mkdir /data/hostapd 0770 system wifi
 
     # Create /data/time folder for time-services
@@ -302,13 +453,10 @@ on post-fs-data
 
     setprop vold.post_fs_data_done 1
 
-    #Create a folder for SRS to be able to create a usercfg file
+    # Create a folder for SRS to be able to create a usercfg file
     mkdir /data/data/media 0770 media media
 
-    #Create folder for mm-qcamera-daemon
-    mkdir /data/camera 0770 media camera
-
-    #Create PERFD deamon related dirs
+    # Create PERFD deamon related dirs
     mkdir /data/misc/perfd 0755 root system
     chmod 2755 /data/misc/perfd
     mkdir /data/system/perfd 0770 root system
@@ -318,58 +466,38 @@ on post-fs-data
     mkdir /data/nfc 0770 nfc nfc
     mkdir /data/nfc/param 0770 nfc nfc
 
+    # sec_efs_file
+    mkdir /efs/sec_efs 0775 radio system
 
-service ssr_setup /system/bin/ssr_setup
-    oneshot
-    disabled
+    # PMK permission
+    mkdir /efs/mc 0770 radio system
+    chown radio system /efs/mc
+    chmod 0770 /efs/mc
+    chown radio system /efs/mc/mc.dat
+    chmod 0640 /efs/mc/mc.dat
 
-service ss_ramdump /system/bin/subsystem_ramdump
-    class main
-    user system
-    group system
-    disabled
+    mkdir /data/misc/radio/hatp 0755 radio system
 
-on property:persist.sys.ssr.restart_level=*
-    start ssr_setup
+    # h2k permission
+    mkdir /efs/cpk 0771 radio system
+    chmod 0644 /efs/redata.bin
+    chmod 0644 /efs/cpk/redata.bin
+    chown radio radio /efs/h2k.dat
+    chown radio radio /efs/cpk/h2k.dat
+    chmod 0644 /efs/h2k.dat
+    chmod 0644 /efs/cpk/h2k.dat
+    chown system system /efs/drm/h2k
 
-on property:persist.sys.ssr.enable_ramdumps=1
-    write /sys/module/subsystem_restart/parameters/enable_ramdumps 1
-    start ss_ramdump
+    # icd
+    check_icd
+    chown system system /dev/icd
+    chmod 0644 /dev/icd
+    chown system system /dev/icdr
+    chmod 0644 /dev/icdr
+    chown system system /dev/tzic
 
-on property:persist.sys.ssr.enable_ramdumps=0
-    write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
-
-on property:sys.boot_completed=1
-    write /dev/kmsg "Boot completed "
-
-on property:persist.radio.atfwd.start=false
-    stop atfwd
-
-service qcom-debug /system/bin/sh /system/etc/init.qcom.debug.sh
-    class core
-    user root
-    oneshot
-
-# corefile limit and ETB enabling
-on property:persist.debug.trace=1
-    mkdir /data/core 0777 root root
-    write /proc/sys/kernel/core_pattern "/data/core/%E.%p.%e"
-    write /sys/devices/system/cpu/cpu1/online 1
-    write /sys/devices/system/cpu/cpu2/online 1
-    write /sys/devices/system/cpu/cpu3/online 1
-    write /sys/bus/coresight/devices/coresight-etm0/enable 0
-    write /sys/bus/coresight/devices/coresight-etm1/enable 0
-    write /sys/bus/coresight/devices/coresight-etm2/enable 0
-    write /sys/bus/coresight/devices/coresight-etm3/enable 0
-    write /sys/bus/coresight/devices/coresight-etm0/reset 1
-    write /sys/bus/coresight/devices/coresight-etm1/reset 1
-    write /sys/bus/coresight/devices/coresight-etm2/reset 1
-    write /sys/bus/coresight/devices/coresight-etm3/reset 1
-    write /sys/bus/coresight/devices/coresight-etm0/enable 1
-    write /sys/bus/coresight/devices/coresight-etm1/enable 1
-    write /sys/bus/coresight/devices/coresight-etm2/enable 1
-    write /sys/bus/coresight/devices/coresight-etm3/enable 1
-    write /sys/module/coresight_event/parameters/event_abort_enable 1
+on property:ro.use_data_netmgrd=true
+    start netmgrd
 
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
@@ -413,6 +541,12 @@ service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     seclabel u:r:bluetooth_loader:s0
     oneshot
 
+service hcidump /system/bin/sh /system/etc/hcidump.sh
+    user bluetooth
+    group bluetooth system net_bt_admin net_admin
+    disabled
+    oneshot
+
 on property:bluetooth.hciattach=true
     start hciattach
 
@@ -454,6 +588,14 @@ service btwlancoex /system/bin/sh /system/etc/init.qcom.coex.sh
 service macloader /system/bin/macloader
     class main
     oneshot
+
+on property:crypto.driver.load=1
+     insmod /system/lib/modules/qce.ko
+     insmod /system/lib/modules/qcedev.ko
+
+on property:crypto.driver.load=0
+     exec /system/bin/rmmod qcedev.ko
+     exec /system/bin/rmmod qce.ko
 
 on property:init.svc.macloader=stopped
     chown system root /data/.cid.info
@@ -580,11 +722,6 @@ service charger /charger
     group log
     seclabel u:r:healthd:s0
 
-service ssr_diag /system/bin/ssr_diag
-    class late_start
-    user system
-    group system
-
 service hvdcp /system/bin/hvdcp
     class core
     user root
@@ -639,3 +776,9 @@ service wcnss-service /system/bin/wcnss_service
     class main
     user system
     group system wifi radio
+
+on property:persist.sys.ssr.restart_level=1
+    write /sys/module/subsystem_restart/parameters/restart_level 1
+
+on property:persist.sys.ssr.restart_level=3
+    write /sys/module/subsystem_restart/parameters/restart_level 3
