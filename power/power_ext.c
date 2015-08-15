@@ -25,7 +25,7 @@
 #define TK_POWER "/sys/class/input/input1/enabled"
 
 /* touchscreen */
-#define TS_POWER "/sys/class/input/input2/enabled"
+#define TS_POWER "/sys/class/input/input3/enabled"
 
 static void sysfs_write(char *path, char *s) {
     char buf[80];
