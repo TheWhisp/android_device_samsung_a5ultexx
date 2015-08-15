@@ -23,6 +23,8 @@
 # inherit from qcom-common
 -include device/samsung/qcom-common/BoardConfigCommon.mk
 
+LOCAL_PATH := device/samsung/a5ultexx
+
 # Platform
 TARGET_BOARD_PLATFORM := msm8916
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno306
@@ -48,9 +50,6 @@ TARGET_KERNEL_SOURCE         := kernel/samsung/msm8916
 TARGET_KERNEL_CONFIG         := msm8916_sec_defconfig
 TARGET_KERNEL_VARIANT_CONFIG := msm8916_sec_a5u_eur_defconfig
 TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
-
-# malloc implementation
-#MALLOC_IMPL := dlmalloc
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := a5ulte,a5ultexx,SM-A500FU
@@ -102,6 +101,7 @@ AUDIO_FEATURE_ENABLED_FM := true
 TARGET_HW_DISK_ENCRYPTION := true
 
 # Build our own PowerHAL
+TARGET_POWERHAL_SET_INTERACTIVE_EXT := $(LOCAL_PATH)/power/power_ext.c
 TARGET_POWERHAL_VARIANT := qcom
 
 # Wifi
@@ -160,7 +160,6 @@ MAX_EGL_CACHE_SIZE := 2048*1024
 # Display
 DEVICE_RESOLUTION := 720x1280
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
-# TODO:
 TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/devices/virtual/lcd/panel/panel/brightness\"
 TW_BRIGHTNESS_PATH := /sys/devices/virtual/lcd/panel/panel/brightness
