@@ -80,6 +80,9 @@ on fs
 
     setprop ro.crypto.fuse_sdcard true
 
+    chown system radio /dev/block/bootdevice/by-name
+    chmod 0775 /dev/block/bootdevice/by-name
+
     write /sys/kernel/boot_adsp/boot 1
     setprop qcom.audio.init complete
 
