@@ -25,8 +25,8 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-import init.qcom.power.rc
 import init.qcom.usb.rc
+import init.qcom.power.rc
 
 on early-init
     mkdir /persist 0771 system system
@@ -44,7 +44,7 @@ on init
     mkdir /storage 0550 system sdcard_r
     mkdir /storage/emulated 0555 root root
 
-    #External storage directories
+    # External storage directories
     mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
     mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
     mkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw
@@ -70,7 +70,7 @@ on init
     symlink /storage/usbdisk /mnt/usbdisk
 
 on fs
-    mount_all fstab.qcom
+    mount_all ./fstab.qcom
 
     chown system radio /efs
     chmod 0771 /efs

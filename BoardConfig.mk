@@ -40,10 +40,10 @@ TARGET_SPECIFIC_HEADER_PATH := device/samsung/a5ultexx/include
 
 # Kernel
 BOARD_CUSTOM_BOOTIMG_MK      := device/samsung/a5ultexx/mkbootimg.mk
-BOARD_KERNEL_CMDLINE         := console=null androidboot.hardware=qcom androidboot.selinux=permissive user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci
+BOARD_KERNEL_CMDLINE         := console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci androidboot.selinux=permissive
 BOARD_KERNEL_BASE            := 0x80000000
 BOARD_RAMDISK_OFFSET         := 0x02000000
-BOARD_KERNEL_TAGS_OFFSET     := 0x01E00000
+BOARD_KERNEL_TAGS_OFFSET     := 0x01e00000
 BOARD_KERNEL_SEPARATED_DT    := true
 BOARD_KERNEL_PAGESIZE        := 2048
 TARGET_KERNEL_SOURCE         := kernel/samsung/msm8916
