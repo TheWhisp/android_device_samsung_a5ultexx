@@ -35,6 +35,7 @@ TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_CPU_VARIANT := cortex-a53
 TARGET_CPU_CORTEX_A53 := true
+TARGET_BOARD_SUFFIX := _32
 
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/a5ultexx/include
 
@@ -78,6 +79,9 @@ BOARD_HAVE_NFC := true
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
 
+# malloc implementation
+MALLOC_IMPL := dlmalloc
+
 # GPS
 TARGET_GPS_HAL_PATH := $(LOCAL_PATH)/gps
 TARGET_NO_RPC := true
@@ -89,9 +93,9 @@ AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
 # Charger
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
-BOARD_BATTERY_DEVICE_NAME := "battery"
-BOARD_CHARGING_CMDLINE_NAME := "androidboot.bootchg"
-BOARD_CHARGING_CMDLINE_VALUE := "true"
+#BOARD_BATTERY_DEVICE_NAME := "battery"
+#BOARD_CHARGING_CMDLINE_NAME := "androidboot.bootchg"
+#BOARD_CHARGING_CMDLINE_VALUE := "true"
 
 # Enable QCOM FM feature
 TARGET_QCOM_NO_FM_FIRMWARE := true
@@ -141,6 +145,7 @@ BOARD_USES_QC_TIME_SERVICES := true
 TARGET_USES_QCOM_BSP := true
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 PROTOBUF_SUPPORTED := true
+HAVE_SYNAPTICS_I2C_RMI4_FW_UPGRADE := true
 COMMON_GLOBAL_CFLAGS += -DQCOM_BSP
 
 # Media
@@ -180,3 +185,12 @@ RECOVERY_SDCARD_ON_DATA := true
 # Misc.
 BOARD_RECOVERY_SWIPE := true
 TW_HAS_DOWNLOAD_MODE := true
+
+# Dex
+ifeq ($(HOST_OS),linux)
+  ifeq ($(TARGET_BUILD_VARIANT),user)
+    ifeq ($(WITH_DEXPREOPT),)
+      WITH_DEXPREOPT := true
+    endif
+  endif
+endif

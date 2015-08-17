@@ -37,6 +37,7 @@ PRODUCT_COPY_FILES += \
 
 # Audio
 PRODUCT_PACKAGES += \
+    audiod \
     audio.a2dp.default \
     audio.primary.msm8916 \
     audio.r_submix.default \
@@ -51,6 +52,7 @@ PRODUCT_PACKAGES += \
     copybit.msm8916 \
     gralloc.msm8916 \
     hwcomposer.msm8916 \
+    memtrack.msm8916 \
     power.msm8916
 
 # Lights
