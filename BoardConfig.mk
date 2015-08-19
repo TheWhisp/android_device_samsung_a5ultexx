@@ -180,11 +180,14 @@ TW_INTERNAL_STORAGE_PATH := "/data/media"
 TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
 TW_EXTERNAL_STORAGE_PATH := "/external_sd"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+TW_NO_USB_STORAGE := true
+TW_MTP_DEVICE := /dev/usb_mtp_gadget
 RECOVERY_SDCARD_ON_DATA := true
 
 # Misc.
 BOARD_RECOVERY_SWIPE := true
 TW_HAS_DOWNLOAD_MODE := true
+TW_NO_REBOOT_BOOTLOADER := true
 
 # Dex
 ifeq ($(HOST_OS),linux)
