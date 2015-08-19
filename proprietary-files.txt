@@ -178,7 +178,7 @@ vendor/lib/libOmxEvrcDec.so
 vendor/lib/libOmxQcelp13Dec.so
 vendor/lib/libSHIMDivxDrm.so
 
-# Perf (TODO: irq balance unused on 8916?)
+# Perf
 bin/perfd
 vendor/lib/libqti-perfd-client.so
 
@@ -206,6 +206,7 @@ vendor/lib/libqti-perfd-client.so
 bin/rild
 bin/netmgrd
 bin/qmuxd
+bin/qmiproxy
 bin/radish
 bin/rfs_access
 bin/rmt_storage
@@ -226,9 +227,9 @@ lib/libsecnativefeature.so
 lib/libomission_avoidance.so
 lib/librmnetctl.so
 etc/plmn_se13.bin
+etc/
 
 # Thermal
-#bin/mpdecision
 bin/thermal-engine
 vendor/lib/libthermalclient.so
 vendor/lib/libthermalioctl.so
@@ -238,3 +239,13 @@ app/TimeService/TimeService.apk
 bin/time_daemon
 vendor/lib/libtime_genoff.so
 vendor/lib/libTimeService.so
+
+# Other
+bin/nl_listener
+bin/port-bridge
+
+# Firmware
+etc/firmware/Signedrompatch_v30.bin
+etc/firmware/Signedrompatch_v24.bin
+etc/firmware/Signedrompatch_v21.bin
+etc/firmware/Signedrompatch_v20.bin

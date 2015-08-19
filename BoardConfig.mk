@@ -35,7 +35,7 @@ TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_CPU_VARIANT := cortex-a53
 TARGET_CPU_CORTEX_A53 := true
-TARGET_BOARD_SUFFIX := _32
+#TARGET_BOARD_SUFFIX := _32
 
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/a5ultexx/include
 

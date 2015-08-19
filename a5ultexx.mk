@@ -62,6 +62,17 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
     $(LOCAL_PATH)/audio/mixer_paths.xml:system/etc/mixer_paths.xml
 
+# Audio calibration
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/audio/acdb/Bluetooth_cal.acdb:system/etc/Bluetooth_cal.acdb \
+    $(LOCAL_PATH)/audio/acdb/General_cal.acdb:system/etc/General_cal.acdb \
+    $(LOCAL_PATH)/audio/acdb/Global_cal.acdb:system/etc/Global_cal.acdb \
+    $(LOCAL_PATH)/audio/acdb/Handset_cal.acdb:system/etc/Handset_cal.acdb \
+    $(LOCAL_PATH)/audio/acdb/Hdmi_cal.acdb:system/etc/Hdmi_cal.acdb \
+    $(LOCAL_PATH)/audio/acdb/Headset_cal.acdb:system/etc/Headset_cal.acdb \
+    $(LOCAL_PATH)/audio/acdb/Speaker_cal.acdb:system/etc/Speaker_cal.acdb \
+    $(LOCAL_PATH)/audio/Tfa9895.cnt:system/etc/Tfa9895.cnt
+
 # Media Profile
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
@@ -153,6 +164,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.mdpcomp.idletime=600 \
     persist.hwc.mdpcomp.enable=true \
     persist.hwc.ptor.enable=true \
+    ro.vendor.extension_library=libqti-perfd-client.so \
     ro.opengles.version=196608 \
     mm.enable.qcom_parser=3179041 \
     use.voice.path.for.pcm.voip=true \
@@ -188,7 +200,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     qcom.hw.aac.encoder=true \
     ro.config.max_starting_bg=8 \
     mm.enable.smoothstreaming=true \
-    mm.disable.sec_smoothstreaming=true \
     media.aac_51_output_enabled=true \
     ro.qualcomm.bt.hci_transport=smd
 
@@ -203,3 +214,4 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 
 # call dalvik heap config
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)

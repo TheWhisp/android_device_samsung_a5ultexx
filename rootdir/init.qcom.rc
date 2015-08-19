@@ -25,9 +25,11 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
+#import init.target.rc
 import init.qcom.usb.rc
 import init.qcom.power.rc
 
+# TODO: split target specific parts in init.target.rc
 on early-init
     mkdir /persist 0771 system system
     mkdir /efs 0771 system radio
@@ -149,7 +151,7 @@ on boot
     chown radio system /efs/bluetooth
     chmod 0775 /efs/bluetooth
 
-    #Create QMUX deamon socket area
+    # Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
     mkdir /dev/socket/qmux_audio 0770 media audio
@@ -161,8 +163,8 @@ on boot
 
     setprop wifi.interface wlan0
 
-#   Define TCP buffer sizes for various networks
-#   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
+    # Define TCP buffer sizes for various networks
+    # ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.wifi    524288,2097152,4194304,262144,524288,1048576
 
     setprop ro.telephony.call_ring.multiple false
@@ -171,16 +173,16 @@ on boot
     chmod 4755 /system/bin/usbhub
     chmod 755 /system/bin/usbhub_init
 
-    #Remove SUID bit for iproute2 ip tool
+    # Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
 
-    #For bridgemgr daemon to inform the USB driver of the correct transport
+    # For bridgemgr daemon to inform the USB driver of the correct transport
     chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
 
-#   Define TCP buffer sizes for various networks
-#   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
+    # Define TCP buffer sizes for various networks
+    # ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.default 4096,87380,110208,4096,16384,110208
     setprop net.tcp.buffersize.lte     524288,1048576,2097152,262144,524288,1048576
     setprop net.tcp.buffersize.umts    4094,87380,110208,4096,16384,110208
@@ -192,8 +194,8 @@ on boot
     setprop net.tcp.buffersize.gprs    4092,8760,11680,4096,8760,11680
     setprop net.tcp.buffersize.evdo    4094,87380,262144,4096,16384,262144
 
-#   Assign TCP buffer thresholds to be ceiling value of technology maximums
-#   Increased technology maximums should be reflected here.
+    # Assign TCP buffer thresholds to be ceiling value of technology maximums
+    # Increased technology maximums should be reflected here.
     write /proc/sys/net/core/rmem_max  2097152
     write /proc/sys/net/core/wmem_max  2097152
 
@@ -381,11 +383,11 @@ on boot
     chown system system /sys/class/camera/rear/rear_checkfw_user
     chown system system /sys/class/camera/rear/rear_checkfw_factory
 
-    #OTG Test
+    # OTG Test
     chown system radio /sys/class/host_notify/usb_otg/booster
     chmod 0660 /sys/class/host_notify/usb_otg/booster
 
-    #   Access permission for secure touch
+    # Access permission for secure touch
     chmod 0660 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0020/secure_touch_enable
     chmod 0440 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0020/secure_touch
     chmod 0660 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0070/secure_touch_enable
@@ -544,8 +546,9 @@ on post-fs-data
 on property:ro.use_data_netmgrd=true
     start netmgrd
 
-on property:init.svc.wpa_supplicant=stopped
-    stop dhcpcd
+service netmgrd /system/bin/netmgrd
+    class main
+    disabled
 
 on property:bluetooth.isEnabled=true
     start btwlancoex
@@ -610,14 +613,6 @@ service qmuxd /system/bin/qmuxd
     user root
     group radio audio bluetooth gps qcom_diag
 
-service netmgrd /system/bin/netmgrd
-    class main
-    disabled
-
-on property:ro.use_data_netmgrd=false
-    # netmgr not supported on specific target
-    stop netmgrd
-
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth
 # but only if ro.data.large_tcp_window_size property is set.
 on property:ro.data.large_tcp_window_size=true
@@ -652,6 +647,9 @@ on property:init.svc.macloader=stopped
     chmod 0664 /data/.cid.info
     chown system root /data/.rev
     chmod 0664 /data/.rev
+
+on property:init.svc.wpa_supplicant=stopped
+    stop dhcpcd
 
 service p2p_supplicant /system/bin/wpa_supplicant \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
