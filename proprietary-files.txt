@@ -241,8 +241,9 @@ vendor/lib/libtime_genoff.so
 vendor/lib/libTimeService.so
 
 # Other
-bin/nl_listener
-bin/port-bridge
+bin/ssr_diag
+bin/ssr_setup
+bin/subsystem_ramdump
 
 # Firmware
 etc/firmware/Signedrompatch_v30.bin

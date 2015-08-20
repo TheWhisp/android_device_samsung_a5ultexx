@@ -201,7 +201,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.max_starting_bg=8 \
     mm.enable.smoothstreaming=true \
     media.aac_51_output_enabled=true \
-    ro.qualcomm.bt.hci_transport=smd
+    ro.qualcomm.bt.hci_transport=smd \
+    camera2.portability.force_api=1
 
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
