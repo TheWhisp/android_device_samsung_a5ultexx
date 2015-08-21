@@ -159,6 +159,9 @@ MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
 #OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
+# SELinux
+include device/qcom/sepolicy/sepolicy.mk
+
 # TWRP
 # Display
 DEVICE_RESOLUTION := 720x1280
