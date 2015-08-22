@@ -35,7 +35,6 @@ TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_CPU_VARIANT := cortex-a53
 TARGET_CPU_CORTEX_A53 := true
-#TARGET_BOARD_SUFFIX := _32
 
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/a5ultexx/include
 
@@ -93,9 +92,6 @@ AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
 # Charger
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
-#BOARD_BATTERY_DEVICE_NAME := "battery"
-#BOARD_CHARGING_CMDLINE_NAME := "androidboot.bootchg"
-#BOARD_CHARGING_CMDLINE_VALUE := "true"
 
 # Enable QCOM FM feature
 TARGET_QCOM_NO_FM_FIRMWARE := true
@@ -116,6 +112,7 @@ BOARD_HOSTAPD_PRIVATE_LIB 	 := lib_driver_cmd_qcwcn
 BOARD_WLAN_DEVICE 		 := qcwcn
 BOARD_WPA_SUPPLICANT_DRIVER 	 := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
+TARGET_PROVIDES_WCNSS_QMI        := true
 TARGET_USES_QCOM_WCNSS_QMI 	 := true
 TARGET_USES_WCNSS_CTRL 		 := true
 WIFI_DRIVER_FW_PATH_AP 		 := "ap"
