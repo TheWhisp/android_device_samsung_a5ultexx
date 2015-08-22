@@ -12,28 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Permissions
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-    frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
-    frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
-    frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
-    frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
-    frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
-    frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
-    frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
-    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
-    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-    packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml \
-    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-    frameworks/base/nfc-extras/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
-    frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
-    frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
-    frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
-    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml
+# Set composition for USB
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.sys.usb.config=mtp
+
+# Set read only default composition for USB
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sys.usb.default.config=mtp
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -44,8 +29,14 @@ PRODUCT_PACKAGES += \
     audio.usb.default \
     libqcompostprocbundle \
     libqcomvisualizer \
-    libqcomvoiceprocessing \
-    tinymix
+    libqcomvoiceprocessing
+
+# TinyAlsa utils
+PRODUCT_PACKAGES += \
+    tinyplay \
+    tinycap \
+    tinymix \
+    tinypcminfo
 
 # HAL
 PRODUCT_PACKAGES += \
@@ -63,7 +54,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     keystore.msm8916
 
-# Camera Wrapper
+# Camera
 PRODUCT_PACKAGES += \
     libmm-qcamera \
     camera.msm8960
@@ -72,6 +63,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     gps.msm8916
 
+# OMX
 PRODUCT_PACKAGES += \
     libdashplayer \
     libOmxAacEnc \
@@ -82,15 +74,35 @@ PRODUCT_PACKAGES += \
     libOmxVdec \
     libOmxVenc \
     libstagefrighthw \
+    libdashplayer \
     qcmediaplayer
 
-PRODUCT_BOOT_JARS += \
-    qcmediaplayer \
+# FM
+PRODUCT_PACKAGES += \
+    FM2 \
+    FMRecord \
+    libqcomfm_jni \
     qcom.fmradio
 
-# Misc
+# DTB tool
+PRODUCT_PACKAGES += \
+    dtbToolCM
+
+# IPv6 tethering
+PRODUCT_PACKAGES += \
+    ebtables \
+    ethertypes \
+    libebtc
+
+# USB
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
+
+# Filesystem
+PRODUCT_PACKAGES += \
+    e2fsck \
+    fsck.f2fs \
+    make_ext4fs
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \
@@ -108,10 +120,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libxml2 \
     Stk
-
-# Doze
-PRODUCT_PACKAGES += \
-    SamsungDoze
 
 # Prima opensource driver files
 PRODUCT_COPY_FILES += \
@@ -138,9 +146,9 @@ PRODUCT_PACKAGES += \
 # CRDA
 PRODUCT_PACKAGES += \
     crda \
+    linville.key.pub.pem \
     regdbdump \
-    regulatory.bin \
-    linville.key.pub.pem
+    regulatory.bin
 
 # WPA supplicant
 PRODUCT_PACKAGES += \
