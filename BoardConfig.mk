@@ -159,6 +159,15 @@ MAX_EGL_CACHE_SIZE := 2048*1024
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
 
+BOARD_SEPOLICY_DIRS += \
+    device/samsung/a5ultexx/sepolicy
+
+BOARD_SEPOLICY_UNION += \
+    vold.te \
+    file.te \
+    wcnss_service.te \
+    file_contexts
+
 # Misc.
 TARGET_SYSTEM_PROP := device/samsung/a5ultexx/system.prop
 
