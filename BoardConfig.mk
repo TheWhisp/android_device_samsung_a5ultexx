@@ -159,6 +159,9 @@ MAX_EGL_CACHE_SIZE := 2048*1024
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
 
+# Misc.
+TARGET_SYSTEM_PROP := device/samsung/a5ultexx/system.prop
+
 # TWRP
 # Display
 DEVICE_RESOLUTION := 720x1280
