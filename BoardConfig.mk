@@ -47,8 +47,9 @@ BOARD_KERNEL_TAGS_OFFSET     := 0x01e00000
 BOARD_KERNEL_SEPARATED_DT    := true
 BOARD_KERNEL_PAGESIZE        := 2048
 TARGET_KERNEL_SOURCE         := kernel/samsung/msm8916
-TARGET_KERNEL_CONFIG         := msm8916_sec_defconfig
-TARGET_KERNEL_VARIANT_CONFIG := msm8916_sec_a5u_eur_defconfig
+TARGET_KERNEL_CONFIG         := cyanogen_a5ultexx_defconfig
+#TARGET_KERNEL_CONFIG         := msm8916_sec_defconfig
+#TARGET_KERNEL_VARIANT_CONFIG := msm8916_sec_a5u_eur_defconfig
 TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
 
 # Assert
