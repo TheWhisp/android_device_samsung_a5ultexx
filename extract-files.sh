@@ -2,6 +2,9 @@
 
 set -e
 
+export VENDOR=samsung
+export DEVICE=a5ultexx
+
 function extract() {
     for FILE in `egrep -v '(^#|^$)' $1`; do
         OLDIFS=$IFS IFS=":" PARSING_ARRAY=($FILE) IFS=$OLDIFS
@@ -24,12 +27,12 @@ function extract() {
 }
 
 
-BASE=../../../vendor/samsung/a5ultexx/proprietary
+BASE=../../../vendor/$VENDOR/$DEVICE/proprietary
 rm -rf $BASE/*
 
 DEVBASE=../../../vendor/$VENDOR/$DEVICE/proprietary
 rm -rf $DEVBASE/*
 
-extract ../../samsung/a5ultexx/proprietary-files.txt $DEVBASE
+extract ../../$VENDOR/$DEVICE/proprietary-files.txt $DEVBASE
 
-./../../samsung/a5ultexx/setup-makefiles.sh
+./../../$VENDOR/$DEVICE/setup-makefiles.sh
