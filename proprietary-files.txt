@@ -15,7 +15,7 @@ vendor/lib/libqct_resampler.so
 vendor/lib/soundfx/libqcbassboost.so
 vendor/lib/soundfx/libqcreverb.so
 vendor/lib/soundfx/libqcvirt.so
-vendor/lib/libqct_resampler.so
+-vendor/lib/libqct_resampler.so
 
 # Bluetooth
 bin/btnvtool
@@ -133,10 +133,10 @@ vendor/lib/mediadrm/libwvdrmengine.so
 # GPS
 bin/loc_launcher
 etc/permissions/com.qualcomm.location.xml
-lib/libloc_api_v02.so
-lib/libloc_core.so
-lib/libloc_eng.so
-priv-app/com.qualcomm.location/com.qualcomm.location.apk
+-lib/libloc_api_v02.so
+-lib/libloc_core.so
+-lib/libloc_eng.so
+-priv-app/com.qualcomm.location/com.qualcomm.location.apk
 vendor/lib/hw/flp.default.so
 vendor/lib/libgeofence.so
 vendor/lib/libizat_core.so
@@ -186,7 +186,7 @@ vendor/lib/libqti-perfd-client.so
 
 # Postprocessing
 vendor/lib/libdisp-aba.so
-vendor/lib/libmm-abl.so
+-vendor/lib/libmm-abl.so
 vendor/lib/libmm-abl-oem.so
 
 # Qualcomm framework
@@ -237,9 +237,9 @@ vendor/lib/libthermalclient.so
 vendor/lib/libthermalioctl.so
 
 # Time services
-app/TimeService/TimeService.apk
+-app/TimeService/TimeService.apk
 bin/time_daemon
-vendor/lib/libtime_genoff.so
+-vendor/lib/libtime_genoff.so
 vendor/lib/libTimeService.so
 
 # Other
