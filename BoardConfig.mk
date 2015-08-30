@@ -82,10 +82,6 @@ EXTENDED_FONT_FOOTPRINT := true
 # malloc implementation
 MALLOC_IMPL := dlmalloc
 
-# GPS
-TARGET_GPS_HAL_PATH := $(LOCAL_PATH)/gps
-TARGET_NO_RPC := true
-
 # Audio
 BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
