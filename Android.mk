@@ -33,6 +33,19 @@ $(CMN_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(CMN_SYMLINKS)
 
+# DMverity
+DMV_IMAGES := \
+    dmverity.b00 dmverity.b01 dmverity.b02 dmverity.b03 dmverity.mdt
+
+DMV_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(DMV_IMAGES)))
+$(DMV_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "DMV firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(DMV_SYMLINKS)
+
 # ISDB
 ISDB_IMAGES := \
     isdbtmm.b00 isdbtmm.b01 isdbtmm.b02 isdbtmm.b03 isdbtmm.mdt
@@ -45,6 +58,32 @@ $(ISDB_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	$(hide) ln -sf /firmware/image/$(notdir $@) $@
 
 ALL_DEFAULT_INSTALLED_MODULES += $(ISDB_SYMLINKS)
+
+# MCpay
+MCP_IMAGES := \
+    mcpay.b00 mcpay.b01 mcpay.b02 mcpay.b03 mcpay.mdt
+
+MCP_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(MCP_IMAGES)))
+$(MCP_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "MCP firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(MCP_SYMLINKS)
+
+# MLdap
+MLD_IMAGES := \
+    mldap.b00 mldap.b01 mldap.b02 mldap.b03 mldap.mdt
+
+MLD_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(MLD_IMAGES)))
+$(MLD_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "MCP firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(MLD_SYMLINKS)
 
 # Keymaster
 KM_IMAGES := \
@@ -75,6 +114,84 @@ $(MODEM_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(MODEM_SYMLINKS)
 
+# Prov
+PROV_IMAGES := \
+    prov.b00 prov.b01 prov.b02 prov.b03 prov.mtd \
+
+PROV_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(PROV_IMAGES)))
+$(PROV_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "Prov firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(PROV_SYMLINKS)
+
+# SECstor
+SECSTOR_IMAGES := \
+    sec_stor.b00 sec_stor.b01 sec_stor.b02 sec_stor.b03 sec_stor.mdt
+
+SECSTOR_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(SECSTOR_IMAGES)))
+$(SECSTOR_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "Secstor firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(SECSTOR_SYMLINKS)
+
+# Reactive
+REACT_IMAGES := \
+    reactive.b00 reactive.b01 reactive.b02 reactive.b03 reactive.mdt
+
+REACT_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(REACT_IMAGES)))
+$(REACT_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "Reactive firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(REACT_SYMLINKS)
+
+# SKM
+SKM_IMAGES := \
+    skm.b00 skm.b01 skm.b02 skm.b03 skm.mdt
+
+SKM_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(SKM_IMAGES)))
+$(SKM_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "SKM firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(SKM_SYMLINKS)
+
+# SSHDcap
+SSHDCPAP_IMAGES := \
+    sshdcpap.b00 sshdcpap.b01 sshdcpap.b02 sshdcpap.b03 sshdcpap.mdt
+
+SSHDCPAP_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(SSHDCPAP_IMAGES)))
+$(SSHDCPAP_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "SSHDCPAP firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(SSHDCPAP_SYMLINKS)
+
+# Tbase
+TBASE_IMAGES := \
+    tbase.b00 tbase.b01 tbase.b02 tbase.b03 tbase.mdt
+
+TBASE_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(TBASE_IMAGES)))
+$(TBASE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "SSHDCPAP firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(TBASE_SYMLINKS)
+
 # Playready
 PLAYREADY_IMAGES := \
     playread.b00 playread.b01 playread.b02 playread.b03 playread.mdt
@@ -87,6 +204,20 @@ $(PLAYREADY_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	$(hide) ln -sf /firmware/image/$(notdir $@) $@
 
 ALL_DEFAULT_INSTALLED_MODULES += $(PLAYREADY_SYMLINKS)
+
+# TZ
+TZ_IMAGES := \
+    tz_ccm.b00 tz_ccm.b01 tz_ccm.b02 tz_ccm.b03 tz_ccm.mdt
+    tz_otp.b00 tz_otp.b01 tz_otp.b02 tz_otp.b03 tz_otp.mdt
+
+TZ_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(TZ_IMAGES)))
+$(TZ_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "tz firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(TZ_SYMLINKS)
 
 # Wcnss
 WCNSS_IMAGES := \
@@ -114,11 +245,3 @@ $(WV_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	$(hide) ln -sf /firmware/image/$(notdir $@) $@
 
 ALL_DEFAULT_INSTALLED_MODULES += $(WV_SYMLINKS)
-
-# Create a link for the WCNSS config file, which ends up as a writable
-# version in /data/misc/wifi
-$(shell mkdir -p $(TARGET_OUT)/etc/firmware/wlan/prima; \
-    ln -sf /data/misc/wifi/WCNSS_qcom_cfg.ini \
-	    $(TARGET_OUT)/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini)
-
-endif
