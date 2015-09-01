@@ -453,7 +453,6 @@ on post-fs-data
 
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
-    restorecon_recursive /data/misc/audio
 
     # Create directory used by the DASH client
     mkdir /data/misc/dash 0770 media audio
@@ -834,6 +833,3 @@ service wcnss-service /system/bin/wcnss_service
     class main
     user system
     group system wifi radio
-
-on property:sys.boot_completed=1
-   start qrngp
