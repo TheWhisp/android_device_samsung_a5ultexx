@@ -65,10 +65,6 @@ PRODUCT_PACKAGES += \
     Tag \
     com.android.nfc_extras
 
-# Doze
-PRODUCT_PACKAGES += \
-    SamsungDoze
-
 # NFC configuration
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/nfc/libnfc-sec.conf:system/etc/libnfc-sec.conf \
