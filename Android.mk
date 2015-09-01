@@ -206,6 +206,22 @@ $(TZ_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(TZ_SYMLINKS)
 
+# Tima
+TIMA_IMAGES := \
+    tima_atn.b00 tima_atn.b01 tima_atn.b02 tima_atn.b03 tima_atn.mdt \
+    tima_key.b00 tima_key.b01 tima_key.b02 tima_key.b03 tima_key.mdt \
+    tima_lkm.b00 tima_lkm.b01 tima_lkm.b02 tima_lkm.b03 tima_lkm.mdt \
+    tima_pkm.b00 tima_pkm.b01 tima_pkm.b02 tima_pkm.b03 tima_pkm.mdt
+
+TIMA_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(TIMA_IMAGES)))
+$(TIMA_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "Tima firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(TIMA_SYMLINKS)
+
 # Wcnss
 WCNSS_IMAGES := \
     wcnss.b00 wcnss.b01 wcnss.b02 wcnss.b04 wcnss.b06 \
@@ -232,5 +248,12 @@ $(WV_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	$(hide) ln -sf /firmware/image/$(notdir $@) $@
 
 ALL_DEFAULT_INSTALLED_MODULES += $(WV_SYMLINKS)
+
+# Create links for audcal data files
+$(shell mkdir -p $(TARGET_OUT_ETC)/firmware/wcd9306; \
+    ln -sf /data/misc/audio/wcd9320_anc.bin \
+    $(TARGET_OUT_ETC)/firmware/wcd9306/wcd9306_anc.bin; \
+    ln -sf /data/misc/audio/mbhc.bin \
+    $(TARGET_OUT_ETC)/firmware/wcd9306/wcd9306_mbhc.bin)
 
 endif
