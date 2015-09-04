@@ -38,12 +38,16 @@ PRODUCT_PACKAGES += \
     tinymix \
     tinypcminfo
 
-# HAL
+# Display
 PRODUCT_PACKAGES += \
     copybit.msm8916 \
     gralloc.msm8916 \
     hwcomposer.msm8916 \
     memtrack.msm8916 \
+    libtinyxml
+
+# Power
+PRODUCT_PACKAGES += \
     power.msm8916
 
 # Lights
@@ -65,7 +69,6 @@ PRODUCT_PACKAGES += \
 
 # OMX
 PRODUCT_PACKAGES += \
-    libdashplayer \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxCore \
@@ -120,6 +123,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libxml2 \
     Stk
+
+PRODUCT_BOOT_JARS += \
+    qcmediaplayer
 
 # Prima opensource driver files
 PRODUCT_COPY_FILES += \
