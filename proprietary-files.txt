@@ -112,6 +112,14 @@ vendor/lib/libchromatix_s5k5e3yx_wide_vt.so
 vendor/lib/libchromatix_s5k5e3yx_wide_vt_hd.so
 vendor/lib/libchromatix_s5k5e3yx_wide_zslshot.so
 
+lib/libAl_Awb.so
+lib/libAl_Awb_Sp.so
+lib/libaf_algo_rear.so
+lib/libaec_algo_front.so
+lib/libawb_algo_rear_al.so
+lib/libawb_algo_front_al.so
+lib/libaec_algo_rear.so
+
 # Camera firmware
 etc/firmware/cpp_firmware_v1_1_1.fw
 etc/firmware/cpp_firmware_v1_1_6.fw
