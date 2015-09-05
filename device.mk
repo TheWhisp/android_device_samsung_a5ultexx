@@ -136,7 +136,7 @@ PRODUCT_COPY_FILES += \
 
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.ril_class=A5UFRIL
+    ro.telephony.ril_class=A5FURIL
 
 # For testing purposes
 ADDITIONAL_DEFAULT_PROPERTIES += \
