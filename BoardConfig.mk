@@ -130,6 +130,9 @@ BOARD_VOLD_MAX_PARTITIONS := 65
 TARGET_PROVIDES_CAMERA_HAL := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 
+# CMHW
+BOARD_HARDWARE_CLASS += device/samsung/a5ultexx/cmhw
+
 # Workaround to avoid issues with legacy liblights on QCOM platforms
 TARGET_PROVIDES_LIBLIGHT := true
 
