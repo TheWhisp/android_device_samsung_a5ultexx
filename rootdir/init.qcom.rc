@@ -85,6 +85,10 @@ on fs
 
     restorecon_recursive /persist
 
+    # Audio NXP
+    chmod 0666 /dev/i2c-1
+    chown system system /dev/i2c-1
+
     setprop ro.crypto.fuse_sdcard true
 
 on early-boot
@@ -144,10 +148,6 @@ on boot
     # For WiFi
     chown wifi wifi /dev/rfkill
     chmod 0600 /dev/rfkill
-
-    # Audio NXP
-    chmod 0660 /dev/i2c-1
-    chown system system /dev/i2c-1
 
     # For BT MAC address
     mkdir /efs/bluetooth 0775 radio system
