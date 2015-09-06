@@ -124,6 +124,7 @@ etc/firmware/cpp_firmware_v1_1_6.fw
 etc/firmware/cpp_firmware_v1_2_0.fw
 etc/firmware/cpp_firmware_v1_4_0.fw
 etc/B05QL_s5k5e3yx_module_info.xml
+etc/F13QS_imx135_module_info.xml
 
 # DRM
 bin/qseecomd
