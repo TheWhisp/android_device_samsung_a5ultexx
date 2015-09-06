@@ -100,7 +100,6 @@ lib/libmmcamera_wavelet_lib.so
 lib/libmmjpeg_interface.so
 lib/libjpega.so
 lib/libexifa.so
-
 vendor/lib/libchromatix_imx135_vt.so
 vendor/lib/libchromatix_imx135_vt_hd.so
 vendor/lib/libchromatix_s5k5e3yx_wide_common.so
@@ -111,7 +110,6 @@ vendor/lib/libchromatix_s5k5e3yx_wide_video.so
 vendor/lib/libchromatix_s5k5e3yx_wide_vt.so
 vendor/lib/libchromatix_s5k5e3yx_wide_vt_hd.so
 vendor/lib/libchromatix_s5k5e3yx_wide_zslshot.so
-
 lib/libAl_Awb.so
 lib/libAl_Awb_Sp.so
 lib/libaf_algo_rear.so
@@ -125,6 +123,7 @@ etc/firmware/cpp_firmware_v1_1_1.fw
 etc/firmware/cpp_firmware_v1_1_6.fw
 etc/firmware/cpp_firmware_v1_2_0.fw
 etc/firmware/cpp_firmware_v1_4_0.fw
+etc/B05QL_s5k5e3yx_module_info.xml
 
 # DRM
 bin/qseecomd
