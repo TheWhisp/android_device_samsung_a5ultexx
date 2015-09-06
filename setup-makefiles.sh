@@ -89,19 +89,13 @@ PRODUCT_PACKAGES += \\
 
 PRODUCT_PACKAGES += \\
     libtime_genoff \\
-    libTimeService \\
     TimeService
 
 PRODUCT_PACKAGES += \\
-    libqct_resampler \\
     libmm-abl
 
 PRODUCT_PACKAGES += \\
-    libloc_api_v02
-
-PRODUCT_PACKAGES += \\
-    libHevcSwDecoder \\
-    libtime_genoff
+    libHevcSwDecoder
 
 \$(call inherit-product, vendor/$VENDOR/$DEVICE/$DEVICE-vendor-blobs.mk)
 EOF
@@ -178,39 +172,9 @@ LOCAL_CERTIFICATE := platform
 include \$(BUILD_PREBUILT)
 
 include \$(CLEAR_VARS)
-LOCAL_MODULE := libTimeService
-LOCAL_MODULE_OWNER := samsung
-LOCAL_SRC_FILES := proprietary/vendor/lib/libTimeService.so
-LOCAL_MODULE_PATH := \$(TARGET_OUT_SHARED_LIBRARIES)
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_SUFFIX := .so
-LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-include \$(BUILD_PREBUILT)
-
-include \$(CLEAR_VARS)
-LOCAL_MODULE := libloc_api_v02
-LOCAL_MODULE_OWNER := $VENDOR
-LOCAL_SRC_FILES := proprietary/lib/libloc_api_v02.so
-LOCAL_MODULE_PATH := \$(TARGET_OUT_SHARED_LIBRARIES)
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_SUFFIX := .so
-LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-include \$(BUILD_PREBUILT)
-
-include \$(CLEAR_VARS)
 LOCAL_MODULE := libHevcSwDecoder
 LOCAL_MODULE_OWNER := $VENDOR
 LOCAL_SRC_FILES := proprietary/vendor/lib/libHevcSwDecoder.so
-LOCAL_MODULE_PATH := \$(TARGET_OUT_VENDOR_SHARED_LIBRARIES)
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_SUFFIX := .so
-LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-include \$(BUILD_PREBUILT)
-
-include \$(CLEAR_VARS)
-LOCAL_MODULE := libqct_resampler
-LOCAL_MODULE_OWNER := $VENDOR
-LOCAL_SRC_FILES := proprietary/vendor/lib/libqct_resampler.so
 LOCAL_MODULE_PATH := \$(TARGET_OUT_VENDOR_SHARED_LIBRARIES)
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_SUFFIX := .so
