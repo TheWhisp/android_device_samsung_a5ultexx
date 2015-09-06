@@ -61,7 +61,7 @@ PRODUCT_PACKAGES += \
 # Camera
 PRODUCT_PACKAGES += \
     libmm-qcamera \
-    camera.msm8960
+    camera.msm8916
 
 # GPS HAL
 PRODUCT_PACKAGES += \
