@@ -140,9 +140,10 @@ vendor/lib/libWVStreamControlAPI_L1.so
 vendor/lib/mediadrm/libwvdrmengine.so
 
 # GPS
+bin/irsc_util
 bin/loc_launcher
--priv-app/com.qualcomm.location/com.qualcomm.location.apk
-etc/permissions/com.qualcomm.location.xml
+#-priv-app/com.qualcomm.location/com.qualcomm.location.apk
+#etc/permissions/com.qualcomm.location.xml
 lib/libloc_api_v02.so
 vendor/lib/hw/flp.default.so
 vendor/lib/libgeofence.so
@@ -199,7 +200,6 @@ vendor/lib/libdisp-aba.so
 vendor/lib/libmm-abl-oem.so
 
 # Qualcomm framework
-bin/irsc_util
 vendor/lib/libdiag.so
 vendor/lib/libdsutils.so
 vendor/lib/libidl.so
@@ -249,7 +249,7 @@ vendor/lib/libthermalioctl.so
 -app/TimeService/TimeService.apk
 bin/time_daemon
 -vendor/lib/libtime_genoff.so
-vendor/lib/libTimeService.so
+-vendor/lib/libTimeService.so
 lib/libcommon_time_client.so
 
 # Other
@@ -291,5 +291,7 @@ lib/libmysound.so
 lib/libaudio-ril.so
 lib/libaudioroute.so
 lib/libaudiosa.so
+lib/libtinyalsa.so
 lib/soundfx/libaudiosa_sec.so
 lib/soundfx/libaudioeffectoffload.so
+vendor/lib/libaudioalsa.so
