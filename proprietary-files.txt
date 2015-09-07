@@ -140,6 +140,7 @@ vendor/lib/libWVStreamControlAPI_L1.so
 vendor/lib/mediadrm/libwvdrmengine.so
 
 # GPS
+bin/loc_launcher
 -priv-app/com.qualcomm.location/com.qualcomm.location.apk
 etc/permissions/com.qualcomm.location.xml
 lib/libloc_api_v02.so
