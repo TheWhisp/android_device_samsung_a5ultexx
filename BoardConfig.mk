@@ -155,6 +155,9 @@ MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
 #OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
+# ANT+
+BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
+
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
 

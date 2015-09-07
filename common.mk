@@ -119,6 +119,12 @@ PRODUCT_PACKAGES += \
     libwcnss_qmi \
     wcnss_service
 
+# ANT+
+PRODUCT_PACKAGES += \
+   AntHalService \
+   com.dsi.ant.antradio_library \
+   libantradio
+
 # Misc
 PRODUCT_PACKAGES += \
     libxml2 \
