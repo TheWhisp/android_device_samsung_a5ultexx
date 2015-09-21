@@ -142,8 +142,8 @@ vendor/lib/mediadrm/libwvdrmengine.so
 # GPS
 bin/irsc_util
 bin/loc_launcher
-#-priv-app/com.qualcomm.location/com.qualcomm.location.apk
-#etc/permissions/com.qualcomm.location.xml
+-priv-app/com.qualcomm.location/com.qualcomm.location.apk
+etc/permissions/com.qualcomm.location.xml
 lib/libloc_api_v02.so
 vendor/lib/hw/flp.default.so
 vendor/lib/libgeofence.so
