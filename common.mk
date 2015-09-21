@@ -20,6 +20,10 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sys.usb.default.config=mtp
 
+# Advertise that we have USB OTG support
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.isUsbOtgEnabled=true
+
 # Doze
 PRODUCT_PACKAGES += \
     SamsungDoze
