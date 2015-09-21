@@ -20,6 +20,10 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sys.usb.default.config=mtp
 
+# Doze
+PRODUCT_PACKAGES += \
+    SamsungDoze
+
 # Audio
 PRODUCT_PACKAGES += \
     audiod \
