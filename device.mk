@@ -134,11 +134,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.ril_class=A5FURIL
 
-# For testing purposes
-ADDITIONAL_DEFAULT_PROPERTIES += \
-    ro.secure=0 \
-    ro.adb.secure=0
-
 # call dalvik heap config
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
