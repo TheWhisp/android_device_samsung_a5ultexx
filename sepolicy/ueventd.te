@@ -1,0 +1,1 @@
+allow ueventd sysfs_camera:file { open read write };
