@@ -127,6 +127,20 @@ PRODUCT_PACKAGES += \
     ethertypes \
     libebtc
 
+# Ramdisk
+PRODUCT_PACKAGES += \
+    init.crda.sh \
+    init.qcom.bt.sh \
+    init.qcom.coex.sh
+
+PRODUCT_PACKAGES += \
+    fstab.qcom \
+    init.qcom.rc \
+    init.qcom.power.rc \
+    init.qcom.usb.rc \
+    init.recovery.qcom.rc \
+    ueventd.qcom.rc
+
 # USB
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
