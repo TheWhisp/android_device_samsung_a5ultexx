@@ -140,6 +140,14 @@ lib/drm/libdrmwvmplugin.so
 vendor/lib/libWVStreamControlAPI_L1.so
 vendor/lib/mediadrm/libwvdrmengine.so
 
+# Keystore
+vendor/lib/lib-sec-disp.so
+vendor/lib/libSecureUILib.so
+vendor/lib/libStDrvInt.so
+vendor/lib/libsecureui.so
+vendor/lib/libsecureui_svcsock.so
+vendor/lib/libsecureuisvc_jni.so
+
 # GPS
 bin/irsc_util
 bin/loc_launcher
