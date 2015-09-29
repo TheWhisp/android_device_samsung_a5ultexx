@@ -258,7 +258,7 @@ vendor/lib/libthermalioctl.so
 -app/TimeService/TimeService.apk
 bin/time_daemon
 -vendor/lib/libtime_genoff.so
--vendor/lib/libTimeService.so
+vendor/lib/libTimeService.so
 lib/libcommon_time_client.so
 
 # Other
