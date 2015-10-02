@@ -27,6 +27,9 @@
 /* touchscreen */
 #define TS_POWER "/sys/class/input/input3/enabled"
 
+/* gpio keys */
+#define GPIO_KEYS_POWER "/sys/class/input/input9/enabled"
+
 static void sysfs_write(char *path, char *s) {
     char buf[80];
     int len;
@@ -51,4 +54,5 @@ void cm_power_set_interactive_ext(int on) {
     ALOGD("%s: %s input devices", __func__, on ? "enabling" : "disabling");
     sysfs_write(TK_POWER, on ? "1" : "0");
     sysfs_write(TS_POWER, on ? "1" : "0");
+    sysfs_write(GPIO_KEYS_POWER, on ? "1" : "0");
 }
