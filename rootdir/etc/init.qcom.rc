@@ -104,6 +104,7 @@ on early-boot
     setprop qcom.audio.init complete
 
 on boot
+    # Bluetooth
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
@@ -128,33 +129,6 @@ on boot
 
     # for BT MAC address
     mkdir /efs/bluetooth 0775 radio system
-
-    # if already exist
-    chown radio system /efs/bluetooth
-    chmod 0775 /efs/bluetooth
-    setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
-    chown bluetooth net_bt_stack ro.bt.bdaddr_path
-    chown radio net_bt_stack /efs/bluetooth/bt_addr
-    chmod 0640 /efs/bluetooth/bt_addr
-
-    # bluetooth LPM
-    chmod 0220 /proc/bluetooth/sleep/lpm
-    chmod 0220 /proc/bluetooth/sleep/btwrite
-    chown bluetooth net_bt_stack /proc/bluetooth/sleep/lpm
-    chown bluetooth net_bt_stack /proc/bluetooth/sleep/btwrite
-    chmod 0600 /dev/btlock
-    chown bluetooth bluetooth /dev/btlock
-
-    # For WiFi
-    chown wifi wifi /dev/rfkill
-    chmod 0600 /dev/rfkill
-
-    # For BT MAC address
-    mkdir /efs/bluetooth 0775 radio system
-
-    # If already exist
-    chown radio system /efs/bluetooth
-    chmod 0775 /efs/bluetooth
 
     # Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
@@ -405,6 +379,10 @@ on boot
     chmod 0660 /sys/class/input/input3/enabled
     chown system system /sys/class/input/input3/enabled
 
+    # GPIO keys
+    chmod 0660 /sys/class/input/input9/enabled
+    chown system system /sys/class/input/input9/enabled
+
     # Access permission for secure touch
     chmod 0660 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0020/secure_touch_enable
     chmod 0440 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0020/secure_touch
@@ -415,6 +393,13 @@ on boot
     chown system drmrpc /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0070/secure_touch_enable
     chown system drmrpc /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0070/secure_touch
 
+    # Permissions for bluetooth.
+    #setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
+    #chown bluetooth net_bt_stack ro.bt.bdaddr_path
+
+    #chown radio net_bt_stack /efs/bluetooth/bt_addr
+    #chmod 0755 /efs/bluetooth/bt_addr
+    #restorecon_recursive /efs/bluetooth
 
 # msm specific files that need to be created on /data
 on post-fs-data
@@ -426,6 +411,10 @@ on post-fs-data
     restorecon_recursive /data/media
 
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
+
+    # Enable the setgid bit on the directory
+    mkdir /data/bluetooth 0770 bluetooth bluetooth
+    chmod 2770 /data/bluetooth
 
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi system
@@ -563,6 +552,26 @@ on post-fs-data
     chown system system /dev/icdr
     chmod 0644 /dev/icdr
     chown system system /dev/tzic
+
+    # drm and related files in EFS
+    mkdir /efs/drm 0774 drm system
+    mkdir /efs/drm/sdrm 0774 drm system
+    mkdir /efs/drm/sdrm/data_agent 0774 drm system
+    restorecon /efs/drm
+    restorecon /efs/drm/sdrm
+    restorecon /efs/drm/data_agent
+
+    # DivX DRM
+    mkdir /efs/.files 0775
+    mkdir /efs/.files/.dx1 0775
+    mkdir /efs/.files/.dm33 0775
+    mkdir /efs/.files/.mp301 0775
+    chown media system /efs/.files/.dx1
+    chown media system /efs/.files/.dm33
+    chown media system /efs/.files/.mp301
+    chmod 0775 /efs/.files/.dx1
+    chmod 0775 /efs/.files/.dm33
+    chmod 0775 /efs/.files/.mp301
 
     setprop vold.post_fs_data_done 1
 
