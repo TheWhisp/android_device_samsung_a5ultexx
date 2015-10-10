@@ -1,1 +1,2 @@
 allow system_server efs_file:dir search;
+allow system_server sensors_efs_file:file { open read };
