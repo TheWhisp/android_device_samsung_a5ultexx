@@ -258,7 +258,7 @@ on boot
     chown system system /sys/class/sec/tsp/input/enabled
 
     # permission for Input Device(TKEY).
-    chmod 0666 /sys/class/sec/sec_touchkey/input/enabled
+    chmod 0660 /sys/class/sec/sec_touchkey/input/enabled
     chown system system /sys/class/sec/sec_touchkey/input/enabled
     chown system system /sys/class/sec/sec_touchkey/brightness
 
@@ -373,13 +373,9 @@ on boot
     chown system radio /sys/class/host_notify/usb_otg/booster
     chmod 0660 /sys/class/host_notify/usb_otg/booster
 
-    # Touchscreen
-    chown system system /sys/class/input/input3/enabled
-    chmod 0666 /sys/class/input/input3/enabled
-
     # GPIO keys
+    chmod 0660 /sys/class/input/input9/enabled
     chown system system /sys/class/input/input9/enabled
-    chmod 0666 /sys/class/input/input9/enabled
 
     # Access permission for secure touch
     chmod 0660 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0020/secure_touch_enable
