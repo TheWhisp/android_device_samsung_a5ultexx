@@ -118,10 +118,6 @@ PRODUCT_PACKAGES += \
     libqcomfm_jni \
     qcom.fmradio
 
-# DTB tool
-PRODUCT_PACKAGES += \
-    dtbToolCM
-
 # IPv6 tethering
 PRODUCT_PACKAGES += \
     ebtables \
@@ -149,8 +145,7 @@ PRODUCT_PACKAGES += \
 # Filesystem
 PRODUCT_PACKAGES += \
     e2fsck \
-    fsck.f2fs \
-    make_ext4fs
+    fsck.f2fs
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \
