@@ -261,7 +261,6 @@ case $STACK in
     ;;
 esac
 
-
 case $POWER_CLASS in
   1) PWR_CLASS="-p 0" ;
      logi "Power Class: 1";;
@@ -286,22 +285,23 @@ case $LE_POWER_CLASS in
      logi "LE Power Class: To override, Before turning BT ON; setprop qcom.bt.le_dev_pwr_class <1 or 2 or 3>";;
 esac
 
-eval $(/system/bin/hci_qcomm_init -e $PWR_CLASS $LE_PWR_CLASS && echo "exit_code_hci_qcomm_init=0" || echo "exit_code_hci_qcomm_init=1")
+# get the bd addr
+BDADDR=`cat /efs/bluetooth/bt_addr`
 
-case $exit_code_hci_qcomm_init in
-  0) logi "Bluetooth QSoC firmware download succeeded, $BTS_DEVICE $BTS_TYPE $BTS_BAUD $BTS_ADDRESS";;
-  *) failed "Bluetooth QSoC firmware download failed" $exit_code_hci_qcomm_init;
-     case $STACK in
-         "bluez")
-            logi "** Bluez stack **"
-         ;;
-         *)
-            logi "** Bluedroid stack **"
-            setprop bluetooth.status off
-        ;;
-     esac
+if [$BDADDR == ""]
+then
+loge "Could not read address"
+/system/bin/hci_qcomm_init -e $PWR_CLASS $LE_PWR_CLASS
+else
+logi "Address: $BDADDR"
+/system/bin/hci_qcomm_init -b $BDADDR -e $PWR_CLASS $LE_PWR_CLASS
+fi
 
-     exit $exit_code_hci_qcomm_init;;
+case $? in
+  0) logi "Bluetooth QSoC firmware download succeeded, $PWR_CLASS $BDADDR $TRANSPORT";;
+  *) failed "Bluetooth QSoC firmware download failed" $?;
+     setprop bluetooth.status off;
+     exit $?;;
 esac
 
 # init does SIGTERM on ctl.stop for service

@@ -164,10 +164,25 @@ BOARD_SEPOLICY_DIRS += \
     device/samsung/a5-common/sepolicy
 
 BOARD_SEPOLICY_UNION += \
+    bluetooth_loader.te \
+    file_contexts \
+    healthd.te \
+    mediaserver.te \
+    property_contexts \
+    qseecomd.te \
+    system_app.te \
+    time_daemon.te \
     vold.te \
+    bluetooth.te \
     file.te \
-    wcnss_service.te \
-    file_contexts
+    kernel.te \
+    mm-qcamerad.te \
+    property.te \
+    rild.te \
+    system_server.te \
+    ueventd.te \
+    wcnss_service.te
+
 
 # Misc.
 TARGET_SYSTEM_PROP := device/samsung/a5-common/system.prop
