@@ -166,10 +166,8 @@ BOARD_SEPOLICY_DIRS += \
 BOARD_SEPOLICY_UNION += \
     bluetooth_loader.te \
     file_contexts \
-    healthd.te \
     mediaserver.te \
     property_contexts \
-    qseecomd.te \
     system_app.te \
     time_daemon.te \
     vold.te \
