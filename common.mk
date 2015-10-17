@@ -272,8 +272,7 @@ PRODUCT_COPY_FILES += \
 # USB
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp \
-    ro.sys.usb.default.config=mtp \
-    persist.sys.isUsbOtgEnabled=true
+    ro.sys.usb.default.config=mtp
 
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
