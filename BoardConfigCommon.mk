@@ -75,6 +75,9 @@ BOARD_RIL_CLASS := ../../../device/samsung/a5-common/ril/
 # NFC
 BOARD_HAVE_NFC := true
 
+# GPS
+TARGET_GPS_HAL_PATH := device/samsung/a5-common/gps
+
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
 
