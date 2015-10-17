@@ -98,6 +98,13 @@ static int check_vendor_module()
     return rv;
 }
 
+static bool needYUV420preview(android::CameraParameters &params) {
+    int video_width, video_height;
+    params.getPreviewSize(&video_width, &video_height);
+    ALOGV("%s : PreviewSize is %x", __FUNCTION__, video_width*video_height);
+    return video_width*video_height <= 720*720;
+}
+
 #define KEY_VIDEO_HFR_VALUES "video-hfr-values"
 
 const static char * iso_values[] = {"auto,ISO_HJR,ISO100,ISO200,ISO400,ISO800,ISO1600,auto"};
@@ -161,6 +168,11 @@ static char *camera_fixup_setparams(struct camera_device *device, const char *se
         params.set(android::CameraParameters::KEY_ZSL, android::CameraParameters::ZSL_OFF);
     } else {
         params.set(android::CameraParameters::KEY_ZSL, android::CameraParameters::ZSL_ON);
+    }
+
+    if (needYUV420preview(params)) {
+        ALOGV("%s: switching preview format to yuv420p", __FUNCTION__);
+        params.set("preview-format", "yuv420p");
     }
 
     // fix params here
