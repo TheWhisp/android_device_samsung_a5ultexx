@@ -94,6 +94,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libmm-qcamera \
     libstlport \
+    libboringssl-compat \
     camera.msm8916
 
 # GPS HAL
