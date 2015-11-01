@@ -97,8 +97,6 @@ PRODUCT_PACKAGES += \
 # Camera
 PRODUCT_PACKAGES += \
     libmm-qcamera \
-    libstlport \
-    libboringssl-compat \
     camera.msm8916
 
 # GPS HAL
@@ -120,6 +118,11 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_BOOT_JARS += \
     qcmediaplayer
+
+# Misc. libs
+PRODUCT_PACKAGES += \
+    libstlport \
+    libboringssl-compat
 
 # FM
 PRODUCT_PACKAGES += \
