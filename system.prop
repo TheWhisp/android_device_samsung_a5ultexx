@@ -91,3 +91,6 @@ persist.timed.enable=true
 
 # Max background apps
 ro.config.max_starting_bg=8
+
+# Art
+dalvik.vm.dex2oat-flags=--no-watch-dog
