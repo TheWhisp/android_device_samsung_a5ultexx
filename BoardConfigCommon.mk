@@ -39,14 +39,15 @@ TARGET_CPU_CORTEX_A53 := true
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/a5-common/include
 
 # Kernel
-BOARD_DTBTOOL_ARG            := -2
-BOARD_KERNEL_CMDLINE         := console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci androidboot.selinux=permissive
-BOARD_KERNEL_BASE            := 0x80000000
-BOARD_RAMDISK_OFFSET         := 0x02000000
-BOARD_KERNEL_TAGS_OFFSET     := 0x01e00000
-BOARD_KERNEL_SEPARATED_DT    := true
-BOARD_KERNEL_PAGESIZE        := 2048
-TARGET_KERNEL_SOURCE         := kernel/samsung/msm8916
+TARGET_KERNEL_ARCH := arm
+BOARD_DTBTOOL_ARG := -2
+BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci androidboot.selinux=permissive
+BOARD_KERNEL_BASE := 0x80000000
+BOARD_RAMDISK_OFFSET := 0x02000000
+BOARD_KERNEL_TAGS_OFFSET := 0x01e00000
+BOARD_KERNEL_SEPARATED_DT := true
+BOARD_KERNEL_PAGESIZE := 2048
+TARGET_KERNEL_SOURCE := kernel/samsung/msm8916
 
 TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
 
