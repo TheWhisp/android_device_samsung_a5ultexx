@@ -175,7 +175,7 @@ TARGET_SYSTEM_PROP := device/samsung/a5-common/system.prop
 # Display
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
-TW_BRIGHTNESS_PATH := "/sys/devices/soc.0/1a00000.qcom\x2cmdss_mdp/qcom\x2cmdss_fb_primary.138/leds/lcd-backlight/brightness"
+TW_BRIGHTNESS_PATH := "/sys/devices/soc.0/1a00000.qcom\x2cmdss_mdp/qcom\x2cmdss_fb_primary.139/leds/lcd-backlight/brightness"
 TW_MAX_BRIGHTNESS := 255
 TW_NEW_ION_HEAP := true
 TW_TARGET_USES_QCOM_BSP := true
