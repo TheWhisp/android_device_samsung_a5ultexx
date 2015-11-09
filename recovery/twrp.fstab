@@ -6,4 +6,5 @@
 /data		ext4	/dev/block/bootdevice/by-name/userdata 	 length=-16384
 
 /external_sd    vfat    /dev/block/platform/7864900.sdhci/by-num/p1    /dev/block/platform/7864900.sdhci/by-num/p1  flags=display="Micro SD";storage;wipeingui;removable
+/usb-otg        vfat    /dev/block/sda1                                /dev/block/sda                               flags=removable;storage;display="USB OTG"
 
