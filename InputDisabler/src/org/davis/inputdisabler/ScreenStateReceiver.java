@@ -49,8 +49,8 @@ public class ScreenStateReceiver extends BroadcastReceiver implements SensorEven
 
                 // Perform enable->disable->enable sequence
                 enableDevices(true);
-				enableDevices(false, true);
-				enableDevices(true, true);
+		enableDevices(false, true);
+		enableDevices(true, true);
                 break;
             case Intent.ACTION_SCREEN_OFF:
                 Log.d(TAG, "Screen off!");
@@ -84,8 +84,8 @@ public class ScreenStateReceiver extends BroadcastReceiver implements SensorEven
                 // Don't enable touch keys when dozing
                 // Perform enable->disable->enable sequence
                 enableDevices(true, true);
-		enableDevices(false, true);
-		enableDevices(true, true);
+                enableDevices(false, true);
+                enableDevices(true, true);
                 break;
             case TelephonyManager.ACTION_PHONE_STATE_CHANGED:
                 Log.d(TAG, "Phone state changed!");
@@ -105,8 +105,6 @@ public class ScreenStateReceiver extends BroadcastReceiver implements SensorEven
                         }
                         break;
                 }
-
-
                 break;
         }
     }
