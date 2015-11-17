@@ -43,7 +43,7 @@ on early-init
     symlink /data/tombstones /tombstones
 
 on init
-    export LD_PRELOAD "/system/lib/libboringssl-compat.so /system/lib/libsamsung_symbols.so"
+    export LD_SHIM_LIBS /system/lib/libril.so|libsamsung_symbols.so:/system/lib/libcrypto.so|libboringssl-compat.so
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
