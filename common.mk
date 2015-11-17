@@ -123,7 +123,8 @@ PRODUCT_BOOT_JARS += \
 
 # Misc. libs
 PRODUCT_PACKAGES += \
-    libstlport
+    libstlport \
+    libboringssl-compat
 
 # FM
 PRODUCT_PACKAGES += \
