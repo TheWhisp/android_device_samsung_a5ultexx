@@ -52,9 +52,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     InputDisabler
 
-# Samsung symbols
+# Samsung libril shim library
 PRODUCT_PACKAGES += \
-    libsamsung_symbols
+    libril_shim
 
 # Audio
 PRODUCT_PACKAGES += \
