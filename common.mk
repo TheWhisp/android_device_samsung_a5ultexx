@@ -116,6 +116,8 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libstagefrighthw \
     libdashplayer \
+    liqcmediaplayer \
+    libOmxVidcCommon \
     qcmediaplayer
 
 PRODUCT_BOOT_JARS += \
