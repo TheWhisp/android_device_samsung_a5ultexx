@@ -793,7 +793,8 @@ service perfd /system/vendor/bin/perfd
    disabled
 
 service thermal-engine /system/vendor/bin/thermal-engine
-   class main
+   class core
+   seclabel u:r:thermal-engine:s0
    user root
    group root
 
