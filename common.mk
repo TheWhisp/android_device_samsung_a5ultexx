@@ -116,7 +116,6 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libstagefrighthw \
     libdashplayer \
-    liqcmediaplayer \
     libOmxVidcCommon \
     qcmediaplayer
 
