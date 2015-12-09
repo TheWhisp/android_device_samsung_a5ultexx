@@ -559,7 +559,7 @@ on property:bluetooth.isEnabled=true
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
 
-service irsc_util /system/bin/logwrapper /system/bin/irsc_util "/etc/sec_config"
+service irsc_util /system/bin/irsc_util "/etc/sec_config"
     class main
     user root
     oneshot
@@ -786,13 +786,13 @@ service qseecomd /system/bin/qseecomd
    user root
    group root
 
-service perfd /system/vendor/bin/perfd
+service perfd /vendor/bin/perfd
    class main
    user root
    group root
    disabled
 
-service thermal-engine /system/vendor/bin/thermal-engine
+service thermal-engine /vendor/bin/thermal-engine
    class core
    seclabel u:r:thermal-engine:s0
    user root
