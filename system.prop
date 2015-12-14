@@ -30,7 +30,7 @@ ro.vendor.extension_library=libqti-perfd-client.so
 
 # Audio
 tunnel.audio.encode=false
-av.offload.enable=true
+audio.offload.video=true
 audio.offload.gapless.enabled=true
 av.streaming.offload.enable=true
 audio.offload.buffer.size.kb=64
