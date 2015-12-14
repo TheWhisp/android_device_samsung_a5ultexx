@@ -70,10 +70,6 @@ BLUETOOTH_HCI_USE_MCT := true
 # Custom RIL class
 BOARD_RIL_CLASS := ../../../device/samsung/a5-common/ril/
 
-# GPS
-TARGET_GPS_HAL_PATH := device/samsung/a5-common/gps
-BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
-
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
 
