@@ -91,8 +91,11 @@ TARGET_QCOM_NO_FM_FIRMWARE := true
 TARGET_HW_DISK_ENCRYPTION := true
 
 # Build our own PowerHAL
-#TARGET_POWERHAL_SET_INTERACTIVE_EXT := $(LOCAL_PATH)/power/power_ext.c
 TARGET_POWERHAL_VARIANT := qcom
+TARGET_POWERHAL_SET_INTERACTIVE_EXT := $(LOCAL_PATH)/power/power_ext.c
+
+# Touchscreen
+TARGET_TAP_TO_WAKE_NODE := "/sys/class/sec/sec_touchscreen/wake_gesture"
 
 # Wifi
 BOARD_HAS_QCOM_WLAN 		 := true

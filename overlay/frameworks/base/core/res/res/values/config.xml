@@ -355,4 +355,7 @@
         <!-- The Google provider -->
         <item>com.google.android.gms</item>
     </string-array>
+
+    <!-- Whether device supports double tap to wake -->
+    <bool name="config_supportDoubleTapWake">true</bool>
 </resources>

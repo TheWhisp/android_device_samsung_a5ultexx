@@ -357,6 +357,12 @@ on boot
     chmod 0660 /sys/class/input/input9/enabled
     chown system system /sys/class/input/input9/enabled
 
+    # Tap to wake
+    chown system system /sys/class/sec/sec_touchscreen/ts_control
+    chown system system /sys/class/sec/sec_touchscreen/wake_gesture
+    chmod 0664 /sys/class/sec/sec_touchscreen/ts_control
+    chmod 0664 /sys/class/sec/sec_touchscreen/wake_gesture
+
     # Access permission for secure touch
     chmod 0660 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0020/secure_touch_enable
     chmod 0440 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0020/secure_touch
