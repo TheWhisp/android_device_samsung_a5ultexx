@@ -73,9 +73,6 @@ BOARD_RIL_CLASS := ../../../device/samsung/a5-common/ril/
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
 
-# malloc implementation
-MALLOC_IMPL := dlmalloc
-
 # Audio
 BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_DEEP_BUFFER_RINGTONE := true
