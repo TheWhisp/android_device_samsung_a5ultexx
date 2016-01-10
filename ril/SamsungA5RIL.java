@@ -101,8 +101,8 @@ public class SamsungA5RIL extends RIL implements CommandsInterface {
 
     private AudioManager mAudioManager;
 
-    public SamsungA5RIL(Context context, int networkModes, int cdmaSubscription) {
-        this(context, networkModes, cdmaSubscription, null);
+    public SamsungA5RIL(Context context, int preferredNetworkType, int cdmaSubscription) {
+        this(context, preferredNetworkType, cdmaSubscription, null);
     }
 
     public SamsungA5RIL(Context context, int preferredNetworkType,
