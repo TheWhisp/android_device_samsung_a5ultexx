@@ -48,7 +48,6 @@ persist.audio.fluence.speaker=true
 mm.enable.smoothstreaming=true
 vidc.enc.narrow.searchrange=1
 media.aac_51_output_enabled=true
-camera2.portability.force_api=1
 
 # Wi-Fi, Bluetooth
 wifi.interface=wlan0

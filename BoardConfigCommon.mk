@@ -99,7 +99,6 @@ TARGET_TAP_TO_WAKE_NODE := "/sys/class/sec/sec_touchscreen/wake_gesture"
 
 # Wifi
 BOARD_HAS_QCOM_WLAN 		 := true
-BOARD_HAS_QCOM_WLAN_SDK 	 := true
 BOARD_HOSTAPD_DRIVER 		 := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB 	 := lib_driver_cmd_qcwcn
 BOARD_WLAN_DEVICE 		 := qcwcn
@@ -125,7 +124,6 @@ BOARD_VOLD_MAX_PARTITIONS := 65
 # Camera
 TARGET_PROVIDES_CAMERA_HAL := true
 USE_DEVICE_SPECIFIC_CAMERA := true
-COMMON_GLOBAL_CFLAGS += -DCAMERA_VENDOR_L_COMPAT
 
 # CMHW
 BOARD_HARDWARE_CLASS += device/samsung/a5-common/cmhw
