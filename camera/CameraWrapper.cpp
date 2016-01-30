@@ -138,26 +138,6 @@ static char *camera_fixup_getparams(int id, const char *settings)
         params.set(KEY_VIDEO_HFR_VALUES, tmp);
     }
 
-    params.set("hfr-size-values", "1280x720,1280x720,1280x720");
-    params.set("video-hfr-values", "60,90,120,off");
-    
-    int minfps, maxfps;
-    params.getPreviewFpsRange(&minfps, &maxfps);
-    if (minfps >= 60000)
-    {
-		params.set("preview-frame-rate-values", "15,30,60,120");
-        if (minfps >= 120000)
-		{
-			params.set("fast-fps-mode", "2");
-            params.set("preview-frame-rate", "120");
-		}
-		else
-		{
-			params.set("fast-fps-mode", "1");
-			params.set("preview-frame-rate", "60");
-		}
-    }
-
     /* Enforce video-snapshot-supported to true */
     params.set(android::CameraParameters::KEY_VIDEO_SNAPSHOT_SUPPORTED, "true");
 
@@ -211,23 +191,6 @@ static char *camera_fixup_setparams(struct camera_device *device, const char *se
             params.set(android::CameraParameters::KEY_ISO_MODE, "800");
         else if (strcmp(isoMode, "ISO1600") == 0)
             params.set(android::CameraParameters::KEY_ISO_MODE, "1600");
-    }
-    
-    int minfps, maxfps;
-    params.getPreviewFpsRange(&minfps, &maxfps);
-    if (minfps >= 60000)
-    {
-		params.set("preview-frame-rate-values", "15,30,60,120");
-        if (minfps >= 120000)
-		{
-			params.set("fast-fps-mode", "2");
-            params.set("preview-frame-rate", "120");
-		}
-		else
-		{
-			params.set("fast-fps-mode", "1");
-			params.set("preview-frame-rate", "60");
-		}
     }
 
     android::String8 strParams = params.flatten();
