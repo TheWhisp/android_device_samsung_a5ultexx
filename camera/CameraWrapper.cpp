@@ -67,6 +67,8 @@ camera_module_t HAL_MODULE_INFO_SYM = {
     .set_callbacks = NULL, /* remove compilation warnings */
     .get_vendor_tag_ops = NULL, /* remove compilation warnings */
     .open_legacy = NULL, /* remove compilation warnings */
+    .set_torch_mode = NULL, /* remove compilation warnings */
+    .init = NULL, /* remove compilation warnings */
     .reserved = {0}, /* remove compilation warnings */
 };
 
@@ -96,6 +98,13 @@ static int check_vendor_module()
     if (rv)
         ALOGE("failed to open vendor camera module");
     return rv;
+}
+
+static bool needYUV420preview(android::CameraParameters &params) {
+    int video_width, video_height;
+    params.getPreviewSize(&video_width, &video_height);
+    ALOGV("%s : PreviewSize is %x", __FUNCTION__, video_width*video_height);
+    return video_width*video_height <= 720*720;
 }
 
 #define KEY_VIDEO_HFR_VALUES "video-hfr-values"
@@ -161,6 +170,11 @@ static char *camera_fixup_setparams(struct camera_device *device, const char *se
         params.set(android::CameraParameters::KEY_ZSL, android::CameraParameters::ZSL_OFF);
     } else {
         params.set(android::CameraParameters::KEY_ZSL, android::CameraParameters::ZSL_ON);
+    }
+
+    if (needYUV420preview(params)) {
+        ALOGV("%s: switching preview format to yuv420p", __FUNCTION__);
+        params.set("preview-format", "yuv420p");
     }
 
     // fix params here
